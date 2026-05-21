@@ -6,9 +6,9 @@ Built as a portfolio project to demonstrate full-stack TypeScript skills — Rea
 
 🔗 **Live Demo:**
 
----
+(LiveDemo)(https://job-application-ts.vercel.app/)
 
-## Screenshots
+---
 
 > 
 
