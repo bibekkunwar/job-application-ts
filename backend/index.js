@@ -7,21 +7,11 @@ const auth = require("./routes/auth");
 const jobs = require("./routes/jobs");
 const status = require("./routes/status");
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  process.env.FRONTEND_URL,
-].filter(Boolean);
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests with no Origin header (e.g. server-to-server, curl)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error(`Origin ${origin} not allowed by CORS`));
-      }
-    },
+    origin: ["http://localhost:5173", process.env.FRONTEND_URL].filter(
+      Boolean,
+    ),
     credentials: true,
   }),
 );
