@@ -139,24 +139,25 @@ Logout:    logout() in AuthContext → clears user + token state → redirect /l
 |---------|--------|
 | Register / Login | ✅ Complete |
 | Protected routing | ✅ Complete |
+| Token persistence on page refresh (localStorage) | ✅ Complete |
 | Dashboard — list all jobs | ✅ Complete |
 | Add new job application | ✅ Complete |
-| View job detail | 🔄 In progress |
-| Edit job application | ❌ TODO |
-| Delete job application | ❌ TODO |
-| Interview rounds — view | ❌ TODO |
-| Interview rounds — add | ❌ TODO |
+| View job detail | ✅ Complete |
+| Edit job application | ✅ Complete |
+| Delete job application | ✅ Complete |
+| Interview rounds — view | ✅ Complete |
+| Interview rounds — add | ✅ Complete |
 | Interview rounds — edit | ❌ TODO |
-| Interview rounds — delete | ❌ TODO |
-| Search / filter on Dashboard | ❌ TODO |
-| Dashboard stats (Applied/Interview/Offer counts) | ❌ TODO |
-| Logout button | ❌ TODO |
-| Tailwind UI styling (all pages) | ❌ TODO |
-| Loading states on all pages | ❌ TODO |
-| Error states on all pages | ❌ TODO |
-| Deploy backend to Render | ❌ TODO |
-| Deploy frontend to Vercel | ❌ TODO |
-| CORS configuration for production | ❌ TODO |
+| Interview rounds — delete | ✅ Complete |
+| Search / filter on Dashboard | ✅ Complete |
+| Dashboard stats (Applied/Interview/Offer counts) | ✅ Complete |
+| Logout button | ✅ Complete |
+| Tailwind UI styling (all pages) | ✅ Complete |
+| Loading states on all pages | ✅ Complete |
+| Error states on all pages | ✅ Complete |
+| Deploy backend to Render | ✅ Complete |
+| Deploy frontend to Vercel | ✅ Complete |
+| CORS configuration for production | ✅ Complete |
 
 ## UI Design Goals
 - Clean, professional aesthetic suitable for a portfolio piece
@@ -185,15 +186,17 @@ cd frontend && npm run dev
 SUPABASE_URL=https://uuhgehlvlbycqsoctkqx.supabase.co
 SUPABASE_SERVICE_KEY=<service_role_key>
 PORT=3001
+FRONTEND_URL=<vercel-production-url>   # required for production CORS
 
 # frontend/.env
 VITE_API_URL=http://localhost:3001
 ```
 
 ## Known Issues
-- `loading` in AuthContext initialised as `false` to avoid ProtectedRoute deadlock on page load
+- `loading` in AuthContext initialised as `true`; set to `false` after localStorage restore — ProtectedRoutes shows spinner during that window
 - Backend response shape: `{ user: data.user, session: data.session }` — frontend accesses `data.user` and `data.session.access_token`
-- CORS not yet configured for production URLs
+- Some legacy DB rows have lowercase status values (e.g. `"applied"`) — all display code normalises via `titleCase()` before lookups
+- Interview rounds — edit (inline form) not yet implemented
 
 ## When Compacting
 Always preserve: current feature status table, API endpoints, database schema, TypeScript rules.
