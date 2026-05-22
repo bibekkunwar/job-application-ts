@@ -16,6 +16,10 @@ app.use(
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 app.use("/api/auth", auth);
 app.use("/api/jobs", jobs);
 app.use("/api/jobs/:jobId/status", status);
